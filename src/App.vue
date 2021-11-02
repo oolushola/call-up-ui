@@ -10,6 +10,9 @@
 @import './assets/css/app.min.css';
 @import url('https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css');
 
+input, select {
+  border-radius: none;
+}
 </style>
 
 
