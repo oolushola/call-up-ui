@@ -18,7 +18,7 @@ const actions = {
 
   async createUserAccount(context, payload) {
     try {
-      const signUpRequest = await fetch('http://localhost:2100/api/v1/register', {
+      const signUpRequest = await fetch('https://call-up-v1.herokuapp.com/api/v1/register', {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
@@ -35,7 +35,7 @@ const actions = {
 
   async loginRequest(context, payload) {
     try {
-      const requestLogin = await fetch('http://localhost:2100/api/v1/login', {
+      const requestLogin = await fetch('https://call-up-v1.herokuapp.com/api/v1/login', {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
