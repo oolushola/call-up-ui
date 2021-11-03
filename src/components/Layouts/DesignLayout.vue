@@ -135,17 +135,17 @@
 
                         <div class="dropdown d-inline-block">
                             <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            data-bs-toggle="dropdown" @click="showAdditionalOptions">
                                 <img class="rounded-circle header-profile-user" src="../../assets/images/users/avatar-1.jpg"
                                     alt="Header Avatar">
-                                <span class="d-none d-xl-inline-block ms-1" key="t-henry">Olushola</span>
+                                <span class="d-none d-xl-inline-block ms-1" key="t-henry">{{ $store.state.user.name}}</span>
                                 <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <!-- item-->
                                 <a class="dropdown-item" href="#"><i class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-profile">Profile</span></a>
                                 <a class="dropdown-item" href="#"><i class="bx bx-wallet font-size-16 align-middle me-1"></i> <span key="t-my-wallet">My Wallet</span></a>
-                                <a class="dropdown-item d-block" href="#"><span class="badge bg-success float-end">11</span><i class="bx bx-wrench font-size-16 align-middle me-1"></i> <span key="t-settings">Settings</span></a>
+                                <a class="dropdown-item d-block" href="#"><span class="badge bg-success float-end">0</span><i class="bx bx-wrench font-size-16 align-middle me-1"></i> <span key="t-settings">Settings</span></a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item text-danger" href="#" @click="logout"><i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span key="t-logout">Logout</span></a>
                             </div>
@@ -202,7 +202,7 @@
                             <li>
                               <router-link :to="{name: 'BookCallUp'}" class="waves-effect">
                                 <i class="bx bx-pencil"></i>
-                                <span key="t-authentication">Book Call Up {{ $store.state.user.userType }}</span>
+                                <span key="t-authentication">Book Call Up</span>
                               </router-link>
                             </li>
                             <li>
@@ -274,13 +274,16 @@
 export default {
   data() {
     return {
-      userType: this.$store.state.user.userType
+      userType: this.$store.state.user.userType,  
     }
   },
   methods: {
       logout() {
         localStorage.clear()
         this.$router.push('/')
+      },
+      showAdditionalOptions() {
+
       }
   }
 }
