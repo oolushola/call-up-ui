@@ -3,7 +3,11 @@ import App from './App.vue'
 import store from './store/store'
 import router from './routes/router'
 
-
+import './assets/libs/jquery/jquery.min.js'
+import './assets/libs/bootstrap/js/bootstrap.bundle.min.js'
+import './assets/libs/metismenu/metisMenu.min.js'
+import './assets/libs/node-waves/waves.min.js'
+import './assets/js/app.js'
 import DesignLayout from './components/Layouts/DesignLayout.vue'
 import AuthWrapper from './components/AuthWrapper.vue'
 import DashboardCta from './components/DashboardCta.vue'

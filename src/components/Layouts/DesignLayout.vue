@@ -202,7 +202,7 @@
                             <li>
                               <router-link :to="{name: 'BookCallUp'}" class="waves-effect">
                                 <i class="bx bx-pencil"></i>
-                                <span key="t-authentication">Book Call Up</span>
+                                <span key="t-authentication">Book Call Up {{ $store.state.user.userType }}</span>
                               </router-link>
                             </li>
                             <li>
@@ -211,6 +211,7 @@
                                   <span key="t-authentication">Bookings</span>
                               </a>
                             </li>
+                            
                             <div class="" v-if="userType === 'admin'">
                               <li>
                                   <a href="javascript: void(0);">
@@ -239,6 +240,7 @@
             <!-- Start right Content here -->
             <!-- ============================================================== -->
             <div class="main-content">
+                
                 <slot>
                   <router-view></router-view>
                 </slot>
@@ -272,7 +274,7 @@
 export default {
   data() {
     return {
-      userType: 'transporter'
+      userType: this.$store.state.user.userType
     }
   },
   methods: {
