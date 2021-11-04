@@ -1,5 +1,6 @@
 import { createStore  } from "vuex";
 import AuthModule from "./Auth";
+import WalletModule from './Wallet'
 
 const store = new createStore({
   state() {
@@ -15,8 +16,19 @@ const store = new createStore({
       } || null
     }
   },
+  getters: {
+    nameCapitalizer(state) {
+      const arr = state.user.name.split(" ")
+        for (let i = 0; i< arr.length; i++) {
+          arr[i] = arr[i].charAt(0).toUpperCase()+arr[i].slice(1)
+        }
+        const capitalized = arr.join(" ")
+        return capitalized
+    }
+  },
   modules: {
-    Auth: AuthModule
+    Auth: AuthModule,
+    Wallet: WalletModule
   }
 })
 

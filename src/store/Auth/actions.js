@@ -1,7 +1,7 @@
 const actions = {
   async fetchProfileTypes(context) {
     try {
-      const url = 'http://localhost:2100/api/v1/user-types';
+      const url = `${process.env.VUE_APP_BASE_URL}/user-types`;
       const getProfileTypes = await fetch(url, {
         method: 'GET',
         headers: {
@@ -18,7 +18,7 @@ const actions = {
 
   async createUserAccount(context, payload) {
     try {
-      const signUpRequest = await fetch('https://call-up-v1.herokuapp.com/api/v1/register', {
+      const signUpRequest = await fetch(`${process.env.VUE_APP_BASE_URL}/register`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
@@ -35,7 +35,7 @@ const actions = {
 
   async loginRequest(context, payload) {
     try {
-      const requestLogin = await fetch('https://call-up-v1.herokuapp.com/api/v1/login', {
+      const requestLogin = await fetch(`${process.env.VUE_APP_BASE_URL}/login`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json',

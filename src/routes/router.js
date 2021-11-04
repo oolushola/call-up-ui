@@ -12,6 +12,7 @@ import WalletTransactionHistory from '../pages/Wallet/TransactionHistory.vue'
 import FundWallet from '../pages/Wallet/FundWallet.vue'
 import Parks from '../pages/Facilities/Parks.vue'
 import BookCallUp from '../pages/BookCallUp.vue'
+import PaymentVerification from '../pages/Wallet/PaymentVerification.vue'
 import store from '../store/store'
 
 const router = createRouter({
@@ -52,6 +53,9 @@ const router = createRouter({
         requiresAuth: true
       }
     },
+    { name: 'PaymentVerification', path: '/payment-verification', component: PaymentVerification, meta: { 
+      requiresAuth: true
+    }},
     {
       name: '404',
       path: '/:notFound(.*)*',

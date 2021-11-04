@@ -36,7 +36,7 @@
                                   <div class="avatar-md profile-user-wid mb-4">
                                       <img src="../../assets/images/users/avatar-1.jpg" alt="" class="img-thumbnail rounded-circle">
                                   </div>
-                                  <h5 class="font-size-15 text-truncate">{{ capitalizer(user.name) }}</h5>
+                                  <h5 class="font-size-15 text-truncate">{{ $store.getters.nameCapitalizer }}</h5>
                                   <p class="text-muted mb-0 text-truncate">{{ capitalizer(user.userType) }}</p>
                               </div>
                               <div class="col-sm-8">

@@ -138,16 +138,18 @@
                             data-bs-toggle="dropdown" @click="showAdditionalOptions">
                                 <img class="rounded-circle header-profile-user" src="../../assets/images/users/avatar-1.jpg"
                                     alt="Header Avatar">
-                                <span class="d-none d-xl-inline-block ms-1" key="t-henry">{{ $store.state.user.name}}</span>
+                                <span class="d-none d-xl-inline-block ms-1" key="t-henry">{{ $store.getters.nameCapitalizer }}</span>
                                 <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                             </button>
-                            <div class="dropdown-menu dropdown-menu-end">
+                            <div class="dropdown-menu dropdown-menu-end" :class="showLogout ? 'show' : ''">
                                 <!-- item-->
                                 <a class="dropdown-item" href="#"><i class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-profile">Profile</span></a>
                                 <a class="dropdown-item" href="#"><i class="bx bx-wallet font-size-16 align-middle me-1"></i> <span key="t-my-wallet">My Wallet</span></a>
                                 <a class="dropdown-item d-block" href="#"><span class="badge bg-success float-end">0</span><i class="bx bx-wrench font-size-16 align-middle me-1"></i> <span key="t-settings">Settings</span></a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-danger" href="#" @click="logout"><i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span key="t-logout">Logout</span></a>
+                                <span class="dropdown-item text-danger" @click="logout">
+                                    <i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span key="t-logout">Logout</span>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -275,16 +277,17 @@ export default {
   data() {
     return {
       userType: this.$store.state.user.userType,  
+      showLogout: false
     }
   },
   methods: {
-      logout() {
+    logout() {
         localStorage.clear()
-        this.$router.push('/')
-      },
-      showAdditionalOptions() {
-
-      }
+        this.$router.go('/login')
+    },
+    showAdditionalOptions() {
+        this.showLogout = !this.showLogout
+    }
   }
 }
 </script>
