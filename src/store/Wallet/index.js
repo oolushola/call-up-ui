@@ -86,7 +86,7 @@ const Wallet = {
             "access-control-allow-origin": "*",
             Authorization: `Bearer ${flwSecretKey}`,
           },
-          body: {
+          body: JSON.stringify({
             tx_ref: payload.transactionRef,
             amount: payload.amount,
             currency: "NGN",
@@ -106,12 +106,13 @@ const Wallet = {
               description: description,
               logo: img,
             },
-          },
+          }),
         });
-        console.log(raveLinkRequest)
+        
         const raveLinkResponse = await raveLinkRequest.json();
         return raveLinkResponse;
       } catch (err) {
+        console.log(err.message)
         return err;
       }
     },
