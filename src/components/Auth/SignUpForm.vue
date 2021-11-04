@@ -181,9 +181,6 @@ export default {
         }
         const signUpRequest = await this.$store.dispatch('createUserAccount', formData);
         if(signUpRequest.status === 201) {
-          this.$store.state.token = signUpRequest.data.token
-          localStorage.setItem('token', signUpRequest.data.token)
-          localStorage.setItem('name', signUpRequest.data.name)
           this.$router.push('/email-confirmation')
         }
         
