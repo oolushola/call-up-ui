@@ -98,7 +98,7 @@ const Wallet = {
             },
             customer: {
               email: context.rootState.user.email,
-              phonenumber: "080****0810",
+              phonenumber: "08022440810810",
               name: context.rootState.user.name,
             },
             customizations: {

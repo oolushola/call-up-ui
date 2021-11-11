@@ -89,7 +89,7 @@
                                             <div class="flex-grow-1">
                                                 <h6 class="mb-1" key="t-your-order">Funded Wallet.</h6>
                                                 <div class="font-size-12 text-muted">
-                                                    <p class="mb-1" key="t-grammer">Your credit of &#x20A6;5,000,000.00</p>
+                                                    <p class="mb-1" key="t-grammer">Your credit of &#x20A6;0.00</p>
                                                     <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span key="t-min-ago">3 min ago</span></p>
                                                 </div>
                                             </div>
@@ -171,27 +171,56 @@
                                 </router-link>
                             </li>
                             <li>
-                                <router-link to="#">
+                                <a href="javascript:void(0)">
                                     <i class="bx bxs-report"></i>
                                     <span key="t-ecommerce">Reports</span>
-                                </router-link>
+                                </a>
                             </li>
                             <li>
-                                <router-link :to="{name: 'TruckManagement'}">
+                                <a href="javascript:void(0)">
+                                    <i class="bx bxs-user-circle"></i>
+                                    <span key="t-ecommerce">Profile</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)">
                                   <i class="bx bxs-truck"></i>
                                   <span key="t-invoices">Truck Management</span>
-                                </router-link>
+                                </a>
                                 <ul class="sub-menu" aria-expanded="false">
                                   <li>
-                                    <router-link :to="{name: 'TruckManagement'}" key="t-invoice-list">
-                                      Trucks <span class="badge rounded-pill bg-info float-end">65</span>
+                                    <router-link :to="{ name: 'TruckManagement' }" key="t-invoice-list">
+                                      Add New Truck
+                                    </router-link>
+                                  </li>
+                                  <li>
+                                    <router-link :to="{ name: 'verifiedTrucks' }" key="t-invoice-detail">
+                                      Truck Fleets <span class="badge rounded-pill bg-info float-end">{{ $store.getters.getVerifiedTrucks.length   }}</span>
+                                    </router-link>
+                                  </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <router-link :to="{name: 'BookCallUp'}" class="waves-effect">
+                                    <i class="bx bxs-truck"></i>
+                                    <span key="t-authentication">Book Call Up</span>
+                                </router-link>
+                            </li>
+                            <li >
+                                <a href="javascript:void(0)">
+                                  <i class="bx bxs-truck"></i>
+                                  <span key="t-invoices">Park Management</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                  <li>
+                                    <router-link :to="{name: 'parks'}" key="t-invoice-list">
+                                      Add Park <span class="badge rounded-pill bg-info float-end">65</span>
                                     </router-link>
                                   </li>
                                   <li>
                                     <router-link :to="{name: 'verifiedTrucks'}" key="t-invoice-detail">
-                                      Verified Trucks <span class="badge rounded-pill bg-info float-end">04</span>
+                                      View All Parks <span class="badge rounded-pill bg-info float-end">04</span>
                                     </router-link></li>
-                                  <li><router-link :to="{name: 'parks'}" key="t-invoice-detail">Parks</router-link></li>
                                 </ul>
                             </li>
                             
@@ -203,14 +232,14 @@
                             </li>
                             <li>
                               <router-link :to="{name: 'BookCallUp'}" class="waves-effect">
-                                <i class="bx bx-pencil"></i>
-                                <span key="t-authentication">Book Call Up</span>
+                                <i class="bx bx-station bx-burst"></i>
+                                <span key="t-authentication">Book a Bonded Terminal</span>
                               </router-link>
                             </li>
                             <li>
                               <a href="javascript: void(0);" class="waves-effect">
                                   <i class="bx bx-task"></i>
-                                  <span key="t-authentication">Bookings</span>
+                                  <span key="t-authentication">Booking Activities</span>
                               </a>
                             </li>
                             

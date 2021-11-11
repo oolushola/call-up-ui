@@ -155,5 +155,4 @@ export default {
         }
     }
 }
-document.title = `Dashboard: ${localStorage.getItem("name")}`
 </script>

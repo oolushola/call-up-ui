@@ -1,6 +1,7 @@
 import { createStore  } from "vuex";
 import AuthModule from "./Auth";
 import WalletModule from './Wallet'
+import TruckModule from "./Trucks";
 
 const store = new createStore({
   state() {
@@ -13,7 +14,8 @@ const store = new createStore({
         lastLogin: localStorage.getItem("lastLogin"),
         name: localStorage.getItem("name"),
         userType: localStorage.getItem('userType')
-      } || null
+      } || null,
+      displayModal: false
     }
   },
   getters: {
@@ -28,7 +30,8 @@ const store = new createStore({
   },
   modules: {
     Auth: AuthModule,
-    Wallet: WalletModule
+    Wallet: WalletModule,
+    TruckManagement: TruckModule
   }
 })
 

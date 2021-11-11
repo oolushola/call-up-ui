@@ -118,7 +118,9 @@
                       </div>
                       <div class="mt-3">
                           <button type="submit" ref="fundWallet"  class="btn btn-success">Fund Wallet</button>
+                          
                       </div>
+                      
                     </form>
                   </div>
                 </div>
@@ -133,58 +135,94 @@
 <script>
 import useVuelidate from '@vuelidate/core'
 import { required, minValue  } from '@vuelidate/validators'
-
 import Wallet from '../../components/Wallet/Wallet.vue'
 
 export default {
-    components: {
-      wallet: Wallet
-    },
-    setup() {
-      return { v$: useVuelidate() }
-    },
-    validations() {
-      return {
-        amount: { required , min: minValue(10000) },
-        paymentMethod: { required }
-      }
-    },
-    data() {
-      return {
-        charges: 0,
-        amount: 0,
-        chargeOnWallet: 0.0013,
-        transactionRef: `CLU-${this.generateTransactionRef().toUpperCase()}`,
-        paymentMethod: '',
-        isFormSubmitted: false
-      }
-    },
-    computed: {
-      getCharges() {
-        return this.chargeOnWallet * this.amount; 
-      },
-      walletDetails() {
-        return this.$store.getters.userWallet
-      }
-    },
-    methods: {
-      async fundWalletHandler() {
-        this.v$.$touch()
-        if(this.v$.$error) {
-          this.isFormSubmitted = false
-          return 
-        }
-        this.isFormSubmitted = true
-        this.$refs.fundWallet.innerHTML = '<i class="bx bx-loader bx-spin"></i>Please wait...'
-        const formData = {
-          amount: this.amount,
-          transactionRef: this.transactionRef,
-          paymentMethod: this.paymentMethod,
-        }
-        const fundWalletRequest = await this.$store.dispatch('processPayment', formData)
-        console.log(fundWalletRequest)
-      }
+  components: {
+    wallet: Wallet,
+  },
+  setup() {
+    return { v$: useVuelidate() }
+  },
+  validations() {
+    return {
+      amount: { required , min: minValue(10000) },
+      paymentMethod: { required }
     }
+  },
+  data() {
+    return {
+      charges: 0,
+      amount: 0,
+      chargeOnWallet: 0.0013,
+      transactionRef: `CLU-${this.generateTransactionRef().toUpperCase()}`,
+      paymentMethod: '',
+      isFormSubmitted: false,
+      isProduction: process.env.environment
+    }
+  },
+  computed: {
+    getCharges() {
+      return this.chargeOnWallet * this.amount; 
+    },
+    walletDetails() {
+      return this.$store.getters.userWallet
+    }
+  },
+  methods: {
+    async fundWalletHandler() {
+      this.v$.$touch()
+      if(this.v$.$error) {
+        this.isFormSubmitted = false
+        return 
+      }
+      this.isFormSubmitted = true
+      this.$refs.fundWallet.innerHTML = '<i class="bx bx-loader bx-spin"></i>Please wait...'
+      const formData = {
+        amount: this.amount,
+        transactionRef: this.transactionRef,
+        paymentMethod: this.paymentMethod,
+      }
+      console.log(formData)
+      window.FlutterwaveCheckout({
+        public_key: process.env.VUE_APP_FLW_PUBLIC_KEY,
+        tx_ref: this.transactionRef,
+        amount: this.amount,
+        currency: 'NGN',
+        payment_options: 'card',
+        redirect_url: `${process.env.VUE_APP_BASE_URL}/payment-verification`,
+        customer: {
+          name: this.$store.state.user.name,
+          email: this.$store.state.user.email,
+        },
+        callback : (resp) => {
+          console.log('successful' + resp)
+        },
+        onclose: () => {
+          this.$router.push({
+            name: 'PaymentVerification',
+            query: {
+              status: 'failed',
+              tx_ref: this.transactionRef
+            }
+          })
+        },
+        customizations: {
+          title: this.custom_title,
+          description: 'wallet funding',
+          logo: 'https://kaya-world.com/assets/img/kaya/kaya-africa-techonology-nig-ltd.png'
+        }
+      })
+    },
+  },
+  created() {
+    const script = document.createElement('script')
+    script.src = !this.isProduction 
+    ? "https://ravemodal-dev.herokuapp.com/v3.js" 
+    : "https://checkout.flutterwave.com/v3.js";
+    document.getElementsByTagName("head")[0].appendChild(script)
+  }
+
 }
 </script>
 

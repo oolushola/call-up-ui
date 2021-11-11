@@ -47,7 +47,7 @@
                   <div class="card">
                       <div class="card-body">
                           <h4 class="card-title">Truck Directory</h4>
-                          <p class="card-title-desc">You have (5) Unverified Trucks</p>
+                          <p class="card-title-desc">You have ({{ $store.getters.getUnverifiedTrucks.length }}) Unverified Trucks</p>
 
                           <div class="table-responsive">
                               <table class="table table-striped mb-0">
@@ -55,48 +55,43 @@
                                       <tr>
                                           <th>#</th>
                                           <th class="text-center">Date Activated</th>
-                                          <th>Truck Info</th>
+                                          <th>Plate No</th>
+                                          <th>Truck Type</th>
+                                          <th>Truck Length</th>
+                                          <th>Chasis No</th>
+                                          <th class="text-center">Action</th>
                                           <th>Model</th>
                                           <th>Union</th>
                                           <th>Status</th>
-                                          <th class="text-center">Approval</th>
                                           <th class="text-center">Color</th>
-                                          <th class="text-center">Action</th>
                                       </tr>
                                   </thead>
                                   <tbody>
-                                      <tr v-for="(n, i) in 25" :key="n">
-                                          <th scope="row">{{ i+1 }}</th>
-                                          <td class="text-center">10-05-2021</td>
-                                          <td>
-                                            T-1000 XY: Full Sided, 28FT
-                                            <span class="d-block">10920019920192919</span>
-                                          </td>
-                                          <td>Ford Ranger</td>
-                                          <td>NARTO</td>
-                                          <td>In Park</td>
-                                          <td class="text-center"><i class="bx bxs-badge-check text-primary" style="font-size: 20px"></i></td>
-                                          <td class="text-center"><i class="bx bxs-truck" style="font-size: 20px; color: green"></i></td>
+                                      <tr v-if="getVerifiedTrucks.length <= 0" class="text-danger">
                                           <td class="text-center">
-                                            <div class="btn-group btn-group-sm" role="group">
-                                                <div class="btn-group" role="group">
-                                                  <button id="btnGroupVerticalDrop1" type="button" class="btn btn-danger btn-sm" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="bx bx-chevron-down"></i>
-                                                  </button>
-                                                  <div class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop1" style="">
-                                                      <a class="dropdown-item" href="#">History</a>
-                                                      <a class="dropdown-item" href="#">Edit</a>
-                                                      <a class="dropdown-item" href="#">Deactivate</a>
-                                                  </div>
-                                                </div>
-                                            </div>
+                                           <span class="bx bxs-info-circle bx-sm"></span>
                                           </td>
+                                          <td class="text-center" colspan="10"><strong>You have no verified trucks</strong></td>
                                       </tr>
+                                      <verified-truck-items v-else v-for="(truck, index) in getVerifiedTrucks"
+                                        :key="truck.plateNo"
+                                        :counter="index"
+                                        :dateVerified="truck.dateVerified"
+                                        :truckNo="truck.plateNo"
+                                        :truckType="truck.truckType.truckType"
+                                        :truckLength="truck.length.truckLength"
+                                        :chasisNo="truck.chasisNo"
+                                        :truckModel="truck.truckModel"
+                                        :union="truck.union.acronym"
+                                        :truckStatus="truck.stage"
+                                        :activationStatus="truck.activationStatus"
+                                        :truckImage="truck.truckImage"
+                                      ></verified-truck-items>
+                                      
                                       
                                   </tbody>
                               </table>
                           </div>
-
                       </div>
                   </div>
               </div>
@@ -108,6 +103,23 @@
 
 </template>
 
+
+<script>
+import VerifiedTruckItem from '../components/Trucks/VerifiedTruckItem.vue'
+export default {
+  components: {
+    'verified-truck-items': VerifiedTruckItem
+  },
+  computed: {
+    getVerifiedTrucks() {
+      return this.$store.getters.getVerifiedTrucks
+    }
+  },
+  beforeMount() {
+    this.$store.dispatch('fetchVerifiedTrucks')
+  }
+}
+</script>
 
 <style scoped>
 input, select {
