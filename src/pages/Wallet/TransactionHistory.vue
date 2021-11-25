@@ -59,7 +59,8 @@ export default {
     },
     data() {
         return {
-            currentPage: 1
+            currentPage: 1,
+            limit: 20
         }
     },
     computed: {
@@ -73,7 +74,7 @@ export default {
         })
     },
     mounted() {
-        this.walletHistory(this.currentPage)
+        this.walletHistory({ page: this.currentPage, limit: this.limit })
     }
 }
 </script>
