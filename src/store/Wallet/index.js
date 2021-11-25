@@ -43,11 +43,11 @@ const Wallet = {
       return loginReponse;
     },
 
-    async walletHistory(context) {
+    async walletHistory(context, payload) {
       const token = context.rootState.token;
       const url = process.env.VUE_APP_BASE_URL;
       context.commit("SET_WALLET_STATUS");
-      const walletActivities = await fetch(`${url}/user/transaction/history`, {
+      const walletActivities = await fetch(`${url}/user/transaction/history?page=${payload}`, {
         method: "GET",
         headers: {
           "content-type": "application/json",

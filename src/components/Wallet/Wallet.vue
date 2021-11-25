@@ -53,7 +53,7 @@
                                         <div class="flex-grow-1">
                                             <p class="text-muted mb-2">Available Balance</p>
                                             <p v-if="!getWalletDetails"><i class="bx bx-loader bx-spin"></i></p>
-                                            <h5 v-else class="mb-1">&#x20A6;{{ getWalletDetails.availableBalance }}</h5>
+                                            <h5 v-else class="mb-1">&#x20A6;{{ currencyFormatter(getWalletDetails.availableBalance) }}</h5>
                                             <p class="text-muted mb-2">{{ new Date().toUTCString().substr(0, 16) }}</p>
                                         </div>
                                     </div>

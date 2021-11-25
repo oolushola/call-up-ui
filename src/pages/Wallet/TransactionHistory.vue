@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import Wallet from '../../components/Wallet/Wallet.vue'
 import TransactionHistoryItem from './TransactionHistoryItem.vue'
 export default {
@@ -56,13 +57,23 @@ export default {
         wallet: Wallet,
         TransactionHistoryItem: TransactionHistoryItem
     },
+    data() {
+        return {
+            currentPage: 1
+        }
+    },
     computed: {
         walletActivities() {
             return this.$store.getters.userWalletActivities
         }
     },
+    methods: {
+        ...mapActions({
+            walletHistory: 'walletHistory'
+        })
+    },
     mounted() {
-        this.$store.dispatch('walletHistory')
+        this.walletHistory(this.currentPage)
     }
 }
 </script>
