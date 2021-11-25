@@ -35,67 +35,42 @@
                   <input type="date" class="form-control form-control-sm" id="inlineFormInputGroupUsername">
                   <div class="input-group-text"><i class="bx bx-search"></i></div>
                   <div class="input-group-text">
-                    <router-link title="Add New Truck" :to="{name: 'TruckManagement'}"><i class="bx bx-plus-medical"></i>
+                    <router-link title="Add Park" :to="{name: 'newPark'}"><i class="bx bx-plus-medical"></i>
                     </router-link></div>
                 </div>
               </div>
             </div>
 
+            <router-view></router-view>
+
             <div class="row">
               <div class="col-lg-12">
-                  <div class="card">
-                      <div class="card-body">
-                          <h4 class="card-title">Truck Directory</h4>
-                          <p class="card-title-desc">You have (5) Unverified Trucks</p>
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">My Parks</h4>
+                    <p class="card-title-desc">Hi {{ capitalizer($store.state.user.name) }}, you have {{ userParks.length }} associated with your account.</p>
 
-                          <div class="table-responsive">
-                              <table class="table table-striped mb-0">
-                                  <thead>
-                                      <tr>
-                                          <th>SN</th>
-                                          <th>Name</th>
-                                          <th class="text-center">Action</th>
-                                          <th>Contact Information</th>
-                                          <th>Capacity</th>
-                                          <th>Park Status</th>
-                                          <th class="text-center">Available Space</th>
-                                      </tr>
-                                  </thead>
-                                  <tbody>
-                                      <tr v-for="(n, i) in 15" :key="n">
-                                          <th scope="row">{{ i+1 }}</th>
-                                          <td>MOB Integrated Services</td>
-                                          <td class="text-center">
-                                            <div class="btn-group btn-group-sm" role="group">
-                                                <div class="btn-group" role="group">
-                                                  <button id="btnGroupVerticalDrop1" type="button" class="btn btn-danger btn-sm" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                       <i class="bx bx-chevron-down"></i>
-                                                  </button>
-                                                  <div class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop1" style="">
-                                                      <a class="dropdown-item" href="#">Locate Address</a>
-                                                      <a class="dropdown-item" href="#">View Park Images</a>
-                                                      <a class="dropdown-item" href="#">Your History</a>
-                                                      <a class="dropdown-item" href="#">View Park Fatures</a>
-                                                  </div>
-                                                </div>
-                                            </div>
-                                          </td>
-                                          <td>
-                                            3A Gbenga Ademulegun Lane, Parkview, Ikoyi, Lagos.
-                                            <br />
-                                            08056547277, 08129112872
-                                          </td>
-                                          <td>550 (Trucks)</td>
-                                          <td><span class="badge rounded-pill bg-success">Active</span>  <span class="badge rounded-pill bg-primary">Public</span></td>
-                                          <td class="text-center">3 Trucks</td>
-                                      </tr>
-                                      
-                                  </tbody>
-                              </table>
-                          </div>
+                    <div class="table-responsive" style="min-height: 500px">
+                      <table class="table table-striped mb-0">
+                        <thead>
+                          <tr>
+                            <th>SN</th>
+                            <th>Name</th>
+                            <th class="text-center">Action</th>
+                            <th>Contact Information</th>
+                            <th>Capacity</th>
+                            <th>Park Status</th>
+                            <th class="text-center">Available Space</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <user-park-item v-for="(park, index) in userParks" :key="park._id" :park="park" :counter="index"></user-park-item>
+                        </tbody>
+                      </table>
+                    </div>
 
-                      </div>
                   </div>
+                </div>
               </div>
             </div>
             
@@ -105,6 +80,25 @@
 
 </template>
 
+
+<script>
+import { mapGetters } from 'vuex'
+import UserParkItem from '../../components/Facilities/UserParkItem.vue'
+
+export default {
+  components: {
+    'user-park-item': UserParkItem
+  },
+  computed: {
+    ...mapGetters({
+      userParks: 'getUserParks'
+    })    
+  },
+  async mounted() {
+    await this.$store.dispatch('fetchUserPark')
+  }
+}
+</script>
 
 <style scoped>
 input, select {

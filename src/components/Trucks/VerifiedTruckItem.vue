@@ -11,20 +11,20 @@
     <td><span class="badge rounded-pill bg-primary p-2">{{ chasisNo.toUpperCase() }}</span></td>
     <td class="text-center">
       <div class="btn-group btn-group-sm" role="group">
-          <div class="btn-group" role="group">
-            <button id="btnGroupVerticalDrop1" type="button" class="btn btn-danger btn-sm" @click="showActionHandler">
-              <i class="bx bx-chevron-down"></i> 
-            </button>
-            <div class="dropdown-menu" :class="showActionDetails">
-                <a class="dropdown-item" href="#">History</a>
-                <a class="dropdown-item" href="#">Verify QR Code</a>
-                <a class="dropdown-item" href="#">Truck Details</a>
-                <a :href="truckImage" class="dropdown-item" target="_blank">View Image</a>
-                <a class="dropdown-item" href="javascript:void(0)">
-                  {{ activationStatus ? 'Disable': 'Enable' }}
-                </a>
-            </div>
+        <div class="btn-group" role="group">
+          <button id="btnGroupVerticalDrop1" type="button" class="btn btn-danger btn-sm" @click="showActionHandler">
+            <i class="bx bx-chevron-down"></i> 
+          </button>
+          <div class="dropdown-menu" :class="showActionDetails">
+            <a class="dropdown-item" href="#">History</a>
+            <a class="dropdown-item" href="#">Verify QR Code</a>
+            <a class="dropdown-item" href="#">Truck Details</a>
+            <a :href="truckImage" class="dropdown-item" target="_blank">View Image</a>
+            <a class="dropdown-item" href="javascript:void(0)">
+              {{ activationStatus ? 'Disable': 'Enable' }}
+            </a>
           </div>
+        </div>
       </div>
     </td>
     <td>{{ capitalizer(truckModel) }}</td>

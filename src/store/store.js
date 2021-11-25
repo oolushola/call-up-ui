@@ -2,6 +2,9 @@ import { createStore  } from "vuex";
 import AuthModule from "./Auth";
 import WalletModule from './Wallet'
 import TruckModule from "./Trucks";
+import CallUpModule from "./CallUp"
+import ParkModule from "./Parks";
+import TerminalModule from "./Terminal";
 
 const store = new createStore({
   state() {
@@ -15,7 +18,8 @@ const store = new createStore({
         name: localStorage.getItem("name"),
         userType: localStorage.getItem('userType')
       } || null,
-      displayModal: false
+      displayModal: false,
+      selectedHoldingBay: ''
     }
   },
   getters: {
@@ -31,7 +35,10 @@ const store = new createStore({
   modules: {
     Auth: AuthModule,
     Wallet: WalletModule,
-    TruckManagement: TruckModule
+    TruckManagement: TruckModule,
+    CallUp: CallUpModule,
+    Park: ParkModule,
+    Terminal: TerminalModule
   }
 })
 
