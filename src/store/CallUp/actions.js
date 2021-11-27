@@ -76,7 +76,6 @@ const actions = {
   },
 
   async bookCallUpRequest(context, payload) {
-    console.log(payload)
     try {
       let trucks = [];
       payload.trucks.map((truck) => {
@@ -115,16 +114,18 @@ const actions = {
   async previewCallUp(context, payload) {
     try {
       const fetchCallUpPreview = await fetch(
-        `${process.env.VUE_APP_BASE_URL}/preview-call-up?bookings=${payload}`, {
-          method: 'GET',
+        `${process.env.VUE_APP_BASE_URL}/preview-call-up?bookings=${payload}`,
+        {
+          method: "GET",
           headers: {
-            'Authorization': `Bearer ${context.rootState.token}`,
-            'Content-Type': 'application/json'
+            Authorization: `Bearer ${context.rootState.token}`,
+            "Content-Type": "application/json",
           },
-        });
-      const callUpResponse = await fetchCallUpPreview.json()
-      context.commit('SET_CALL_UP_PREVIEW', callUpResponse)
-      return callUpResponse
+        }
+      );
+      const callUpResponse = await fetchCallUpPreview.json();
+      context.commit("SET_CALL_UP_PREVIEW", callUpResponse);
+      return callUpResponse;
     } catch (err) {
       return err;
     }
@@ -132,20 +133,89 @@ const actions = {
 
   async fetchBookingActivities(context) {
     try {
-      const bookingActivitiesReq = await fetch(`${process.env.VUE_APP_BASE_URL}/booking-activities`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${context.rootState.token}`
+      const bookingActivitiesReq = await fetch(
+        `${process.env.VUE_APP_BASE_URL}/booking-activities`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${context.rootState.token}`,
+          },
         }
-      })
-      const bookingActivitiesResp = await bookingActivitiesReq.json()
-      context.commit('SET_BOOKING_ACTIVITIES', bookingActivitiesResp)
+      );
+      const bookingActivitiesResp = await bookingActivitiesReq.json();
+      context.commit("SET_BOOKING_ACTIVITIES", bookingActivitiesResp);
+    } catch (err) {
+      return err;
     }
-    catch(err) {
-      return err
+  },
+
+  async removeHoldingBayStopOver(context, payload) {
+    const parkId = payload.parkId;
+    const bookingId = payload.bookingId;
+    try {
+      const removeStopReq = await fetch(
+        `${process.env.VUE_APP_BASE_URL}/holding-bay/stops/${bookingId}?stop=${parkId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${context.rootState.token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      await removeStopReq.json();
+      context.commit("SET_UPDATED_HOLDING_BAY_STOP", { parkId, bookingId });
+    } catch (err) {
+      return err;
     }
-  }
-}
+  },
+
+  async removeHoldingBayOnService(context, payload) {
+    const service = payload.service;
+    const bookingId = payload.bookingId;
+    try {
+      const removeAddOnServiceReq = await fetch(
+        `${process.env.VUE_APP_BASE_URL}/holding-bay/add-on/${bookingId}?service=${service}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${context.rootState.token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      await removeAddOnServiceReq.json();
+      context.commit("SET_UPDATED_HOLDING_BAY_ADDON", { service, bookingId });
+    } catch (err) {
+      return err;
+    }
+  },
+
+  async updateWalletLog(context, payload) {
+    try {
+      const updateTransactionLog = await fetch(
+        `${process.env.VUE_APP_BASE_URL}/wallet-transaction-update?paymentMode=${payload.paymentMethod}`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${context.rootState.token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            status: payload.status,
+            transactionRef: payload.tx_ref,
+            amount: payload.amount,
+            bookingId: payload.bookingId
+          })
+        },
+      );
+      const transactionLogUpdateResp = await updateTransactionLog.json()
+      return transactionLogUpdateResp
+    } catch (err) {
+      return err;
+    }
+  },
+};
 
 export default actions;

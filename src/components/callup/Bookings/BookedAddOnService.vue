@@ -19,6 +19,7 @@
 						:key="service._id"
 						:counter="index"
 						:service="service"
+						:bookingId="bookingId"
 					/>
 					<tr>
 						<td colspan="3" class="border-0 text-end">
@@ -47,6 +48,10 @@ export default {
 			type: Object,
 			require: true,
 		},
+		bookingId: {
+			type: String,
+			require: true
+		}
 	},
 	methods: {
 		totalAddOnService(object) {

@@ -32,7 +32,7 @@
                   label="Called In Today"
                   type="bar"
                   id="calledIn"
-                  height="300"
+                  :height="calledInHeight"
                 ></single-chart>
               </div>
               <div class="col-md-4">
@@ -42,7 +42,7 @@
                   label="TDO Matched Today"
                   type="bar"
                   id="matched"
-                  height="300"
+                  :height="matchedTruckHeight"
                 ></single-chart>
               </div>
               <div class="col-md-4">
@@ -52,7 +52,7 @@
                   label="TDO's Uploaded"
                   type="bar"
                   id="tdoUploaded"
-                  height="300"
+                  :height="tdoUploadedHeight"
                 ></single-chart>
               </div>
               <div class="col-md-12">
@@ -62,7 +62,7 @@
                   label="Daily Matched Terminal Delivery Order"
                   type="line"
                   id="dailyMatched"
-                  height="200"
+                  :height="dailyCallInHeight"
                 ></single-chart>
               </div>
             </div>
@@ -86,7 +86,11 @@ export default {
       tdoUploadedLabels: ["Terminal Delivery Order"],
       tdoUploadedData: [6],
       dailyCallInLabels: ["1st-nov", "2nd-nov", "3rd-nov", "4th-nov"],
-      dailyCallInData: [0, 7, 3, 9]
+      dailyCallInData: [0, 7, 3, 9],
+      matchedTruckHeight: 300,
+      calledInHeight: 300,
+      tdoUploadedHeight: 300,
+      dailyCallInHeight: 200
 		};
 	},
 	components: {

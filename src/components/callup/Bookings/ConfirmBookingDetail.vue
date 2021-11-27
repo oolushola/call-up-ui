@@ -43,6 +43,7 @@
 													<button
 														@click="payNow(booking.bookingQuery._id)"
 														class="btn btn-success font-weight-bold btn-sm"
+														v-if="!booking.bookingQuery.paymentStatus"
 													>
 														PAY NOW
 													</button>
@@ -62,9 +63,23 @@
 											/>
 
 											<booked-park :bookedPark="booking.bookingQuery.parkId" />
-                      <booking-stop-over :stops="booking.bookingQuery.stops" />
-                      <booked-add-on-service :services="booking.bookingQuery.addOnService" />
-											<payment-modal v-if="showModal" :bookingId="bookingId" :stops="booking.bookingQuery.stops" :addOnServices="booking.bookingQuery.addOnService" />
+											<booking-stop-over
+												:bookingId="booking.bookingQuery._id"
+												:stops="booking.bookingQuery.stops"
+											/>
+											<booked-add-on-service
+												:bookingId="booking.bookingQuery._id"
+												:services="booking.bookingQuery.addOnService"
+											/>
+											<payment-modal
+												v-if="showModal && !showPaymentResponseModal"
+												:bookingId="bookingId"
+												:stops="booking.bookingQuery.stops"
+												:addOnServices="booking.bookingQuery.addOnService"
+												@displayPaymentResponse="showPaymentResponse" 
+											/>
+
+											<payment-response :paymentResponse="paymentResponse" v-if="showPaymentResponseModal && showModal" />
 
 										</div>
 									</div>
@@ -73,9 +88,6 @@
 						</div>
 					</div>
 				</section>
-
-				
-
 			</div>
 		</div>
 	</design-layout>
@@ -85,28 +97,32 @@
 import { mapActions, mapGetters } from "vuex";
 import BookedTerminal from "./BookedTerminalDetail.vue";
 import BookedPark from "./BookedPark.vue";
-import BookingStopOver from "./BookingStopOver.vue"
-import BookedAddOnService from "./BookedAddOnService.vue"
-import PaymentModal from "./PaymentModal.vue"
+import BookingStopOver from "./BookingStopOver.vue";
+import BookedAddOnService from "./BookedAddOnService.vue";
+import PaymentModal from "./PaymentModal.vue";
+import PaymentResponse from "./PaymentResponse.vue"
 
 export default {
 	data() {
 		return {
-			bookingId: ''
-		}
+			bookingId: "",
+			showPaymentResponseModal: false,
+			paymentResponse: {}
+		};
 	},
-	
+
 	components: {
 		"booked-terminal": BookedTerminal,
 		"booked-park": BookedPark,
-    "booking-stop-over": BookingStopOver,
-    "booked-add-on-service": BookedAddOnService,
-		"payment-modal": PaymentModal
+		"booking-stop-over": BookingStopOver,
+		"booked-add-on-service": BookedAddOnService,
+		"payment-modal": PaymentModal,
+		"payment-response": PaymentResponse
 	},
 
 	computed: {
 		showModal() {
-			return  this.$store.state.displayModal
+			return this.$store.state.displayModal;
 		},
 		...mapGetters({
 			pendingCallUps: "getCallUpPreviews",
@@ -118,8 +134,12 @@ export default {
 			bookingsPreview: "previewCallUp",
 		}),
 		payNow(tripId) {
-			this.bookingId = tripId
-			this.$store.state.displayModal = true
+			this.bookingId = tripId;
+			this.$store.state.displayModal = true;
+		},
+		showPaymentResponse(value) {
+			this.showPaymentResponseModal = true
+			this.paymentResponse = value
 		}
 	},
 
@@ -128,8 +148,5 @@ export default {
 		this.bookingsPreview(bookingIds);
 	},
 
-	beforeMount() {
-		this.initializeFlutterWave(process.env.ENVIRONMENT)
-	}
 };
 </script>

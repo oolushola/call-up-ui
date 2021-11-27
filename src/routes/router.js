@@ -28,6 +28,7 @@ import BookingActivities from "../pages/BookingActivities.vue";
 
 import HoldingBay from '../pages/Facilities/HoldingBays.vue'
 import BookHoldingBay from "../pages/BookHoldingBay.vue";
+import HoldingBayReceipt from "../components/callup/Receipt/CallUpReceipt.vue"
 
 
 import store from "../store/store";
@@ -132,6 +133,14 @@ const router = createRouter({
       name: "previewCallUp",
       path: "/booking/preview",
       component: ConfirmBookingDetails,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      name: "holdingBayReceipt",
+      path: "/booking-receipt/:bookingId",
+      component: HoldingBayReceipt,
       meta: {
         requiresAuth: true,
       },

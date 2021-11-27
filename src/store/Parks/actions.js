@@ -112,7 +112,7 @@ const actions = {
     catch(err) {
       return err
     }
-  }
+  },
 }
 
 export default actions

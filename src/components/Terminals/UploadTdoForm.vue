@@ -34,7 +34,7 @@
 
               <div class="col-md-3">
                 <div class="mb-3">
-                  <label for="formrow-email-input" class="form-label">Assign To</label>
+                  <label for="formrow-email-input" class="form-label">Clearing Agent</label>
                   <select class="form-control form-select" v-model="formData.clearingAgentId" :class="v$.formData.clearingAgentId.$error ? 'errorLabel' : ''">
                     <option value="0">Select a clearing agent</option>
                     <option v-for="agent in clearingAgents" :value="agent._id" :key="agent._id">{{ capitalizer(agent.name) }}</option>
@@ -187,7 +187,7 @@ export default {
     },
 
     async requestHandlers() {
-      await this.$store.dispatch('getClearingAgents', 'clearing agent')
+      await this.$store.dispatch('getClearingAgents', 'agent')
       await this.$store.dispatch('fetchTerminals')
     }
   },

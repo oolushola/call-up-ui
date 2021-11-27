@@ -15,7 +15,7 @@
 									<th>Booking Category</th>
 									<th>Terminal</th>
 									<th>Park Name</th>
-									<th>Payment Status</th>
+									<th class="text-center">Payment Status</th>
 									<th>Date Called Out</th>
 									<th class="text-center">Action</th>
 								</tr>
