@@ -11,7 +11,8 @@ const CallUp = {
       addOnServices: [],
       bookingResponse: [],
       callUpPreview: [],
-      bookingActivities: []
+      bookingActivities: [],
+      trucksInParks: []
     };
   },
   mutations: mutations,

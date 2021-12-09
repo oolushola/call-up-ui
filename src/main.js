@@ -10,7 +10,9 @@ import AuthWrapper from './components/AuthWrapper.vue'
 import DashboardCta from './components/DashboardCta.vue'
 import BaseModal from './components/UI/BaseModal.vue'
 import SuccessCheck from './components/UI/BaseSuccess.vue'
-
+import Paginator from './components/UI/BasePaginator.vue'
+import BaseSpinner from './components/UI/BaseSpinner.vue'
+import RecordNotFound from './components/UI/RecordNotFound.vue'
 
 const app = createApp(App);
 
@@ -24,6 +26,9 @@ app.component('dashboard-cta', DashboardCta)
 app.component('design-layout', DesignLayout)
 app.component('modal', BaseModal)
 app.component("success-check", SuccessCheck)
+app.component('paginate', Paginator)
+app.component('spinner', BaseSpinner)
+app.component('recordNotFound', RecordNotFound)
 
 router.isReady().then(() => {
   app.mount('#app')

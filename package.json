@@ -19,8 +19,10 @@
     "vue-html-to-paper": "^1.4.4",
     "vue-paystack": "^2.0.2",
     "vue-paystack2": "0.0.7",
+    "vue-qrcode-reader": "^3.0.6",
     "vue-router": "^4.0.12",
     "vue3-print-nb": "^0.1.4",
+    "vue3-qr-reader": "^1.0.0",
     "vuex": "^4.0.2"
   },
   "devDependencies": {

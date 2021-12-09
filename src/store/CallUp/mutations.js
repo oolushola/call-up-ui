@@ -38,6 +38,9 @@ const mutations = {
     );
     bookedBay.bookingQuery.addOnService.splice(addOnIndex, 1);
   },
+  ["SET_TRUCK_IN_PARKS"](state, payload) {
+    state.trucksInParks = payload.data
+  }
 };
 
 export default mutations;

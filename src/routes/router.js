@@ -5,7 +5,7 @@ import SignUpComponent from "../pages/Auth/SignUp.vue";
 import PasswordRecoveryComponent from "../pages/Auth/PasswordRecovery.vue";
 import EmailConfirmationComponent from "../pages/Auth/EmailConfirmation.vue";
 import VerifyEmailComponent from "../pages/Auth/VerifyEmail.vue";
-import DashboardComponent from "../pages/Dashboards/Dashboard.vue";
+import DashboardComponent from "../pages/Dashboard.vue";
 import TruckManagement from "../pages/Trucks.vue";
 import VerifiedTrucks from "../pages/VerifiedTrucks.vue";
 import WalletTransactionHistory from "../pages/Wallet/TransactionHistory.vue";
@@ -29,6 +29,8 @@ import BookingActivities from "../pages/BookingActivities.vue";
 import HoldingBay from '../pages/Facilities/HoldingBays.vue'
 import BookHoldingBay from "../pages/BookHoldingBay.vue";
 import HoldingBayReceipt from "../components/callup/Receipt/CallUpReceipt.vue"
+import ParkActivities from "../pages/Facilities/ParkActivities.vue"
+import CreateUnion from "../pages/Union.vue"
 
 
 import store from "../store/store";
@@ -224,6 +226,22 @@ const router = createRouter({
       meta: {
         requiresAuth: true,
       },
+    },
+    {
+      name: "parkActivity",
+      path: "/park-activities",
+      component: ParkActivities,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      name: "CreateUnion",
+      path: "/union/add",
+      component: CreateUnion,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       name: "404",

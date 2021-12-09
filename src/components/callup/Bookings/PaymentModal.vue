@@ -93,12 +93,15 @@ export default {
 			require: true,
 			type: Array,
 		},
+		charge: {
+			require: true,
+			type: Number
+		}
 	},
 	data() {
 		return {
 			transactionRef: this.generateTransactionRef(),
 			paymentMethod: "",
-			parkCharge: 5000,
 			isPaystack: false,
 			paystackKey: process.env.VUE_APP_PAYSTACK_KEY
 		};
@@ -111,7 +114,7 @@ export default {
 		},
 		totalAmountDue() {
 			return (
-				this.parkCharge + this.parkCharge * this.stops.length + this.totalAddOn
+				this.charge + (this.charge * this.stops.length) + this.totalAddOn
 			);
 		},
 	},

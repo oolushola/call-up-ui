@@ -62,8 +62,8 @@
 							<div class="card-body">
 								<h4 class="card-title">Holding Bays</h4>
 								<p class="card-title-desc"></p>
-
-								<div class="table-responsive" style="height: 600px">
+								<spinner v-if="isLoading" />
+								<div class="table-responsive" v-else>
 									<table class="table table-striped mb-0 table-nowrap">
 										<thead>
 											<tr>
@@ -72,18 +72,23 @@
 												<th>Holding Bay</th>
 												<th class="text-center">Action</th>
 												<th>Contact Information</th>
-												<th class="text-center" >Capacity</th>
-                        <th>Park Type</th>
+												<th class="text-center">Capacity</th>
+												<th>Park Type</th>
 												<th>Park Status</th>
 												<th class="text-center">Available Space</th>
 											</tr>
 										</thead>
+										<record-not-found
+											v-if="holdingBays.length === 0"
+											label="Record not found."
+										/>
 										<holding-bay-item
+											v-else
 											v-for="(holdingBay, index) in holdingBays"
 											:holdingBay="holdingBay"
 											:key="holdingBay._id"
 											:counter="index"
-                      @bookPark="displayModalHandler"
+											@bookPark="displayModalHandler"
 										/>
 									</table>
 								</div>
@@ -125,20 +130,21 @@ export default {
 		},
 		...mapGetters({
 			holdingBays: "getHoldingBays",
+			isLoading: "getFetchResource",
 		}),
 	},
-  data() {
-    return {
-      parkName: ''
-    }
-  },
-  methods: {
-    displayModalHandler(value) {
-      this.parkName = value.parkName
-      this.$store.state.selectedHoldingBay = value.parkId
-      this.$store.state.displayModal = true
-    }
-  },
+	data() {
+		return {
+			parkName: "",
+		};
+	},
+	methods: {
+		displayModalHandler(value) {
+			this.parkName = value.parkName;
+			this.$store.state.selectedHoldingBay = value.parkId;
+			this.$store.state.displayModal = true;
+		},
+	},
 	mounted() {
 		this.$store.dispatch("fetchHoldingBays");
 	},

@@ -24,7 +24,8 @@ const getters = {
       derivedBookingActivities.push(bookinInfo)
     })
     return derivedBookingActivities
-  }
+  },
+  getTrucksInParks: state => state.trucksInParks
 }
 
 export default getters

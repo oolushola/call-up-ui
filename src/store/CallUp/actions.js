@@ -206,12 +206,53 @@ const actions = {
             status: payload.status,
             transactionRef: payload.tx_ref,
             amount: payload.amount,
-            bookingId: payload.bookingId
-          })
-        },
+            bookingId: payload.bookingId,
+          }),
+        }
       );
-      const transactionLogUpdateResp = await updateTransactionLog.json()
-      return transactionLogUpdateResp
+      const transactionLogUpdateResp = await updateTransactionLog.json();
+      return transactionLogUpdateResp;
+    } catch (err) {
+      return err;
+    }
+  },
+
+  async fetchTrucksInParks(context) {
+    try {
+      const truckInParksReq = await fetch(
+        `${process.env.VUE_APP_BASE_URL}/trucks-in-park`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${context.rootState.token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const truckInParksResp = await truckInParksReq.json();
+      context.commit("SET_TRUCK_IN_PARKS", truckInParksResp);
+    } catch (err) {
+      return err;
+    }
+  },
+
+  async previewJourneyCode(context, payload) {
+    context.commit("SET_FETCH_RESOURCE", true);
+    try {
+      const journeyCodeReq = await fetch(
+        `${process.env.VUE_APP_BASE_URL}/preview-journey-code?journeyCode=${payload.toLowerCase()}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${context.rootState.token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const jouneyCodeResp = await journeyCodeReq.json();
+      context.commit("SET_FETCH_RESOURCE", false);
+      context.commit("SET_CALL_UP_PREVIEW", jouneyCodeResp);
+      return jouneyCodeResp
     } catch (err) {
       return err;
     }

@@ -45,14 +45,22 @@
 						<span
 							v-for="(truck, index) in trucks"
 							:key="truck._id"
-							class="bg-info badge rounded-pill p-2 d-inline-block me-2 text-white"
+							class="
+								bg-info
+								badge
+								rounded-pill
+								p-2
+								d-inline-block
+								me-2
+								text-white
+							"
 						>
 							{{ truck.plateNo.toUpperCase() }}
 							<button class="btn-close" @click="removeTruck(index)"></button>
 						</span>
 					</div>
 				</div>
-				
+
 				<div class="col-lg-6">
 					<div class="mb-3">
 						<label for="basicpill-firstname-input">Port Terminal</label>
@@ -91,7 +99,10 @@
 								class="bx bxs-info-circle text-danger bx-tada"
 							></i>
 						</label>
-						<select v-model.lazy="formData.parkStayDuration" class="form-control form-select">
+						<select
+							v-model.lazy.number="formData.parkStayDuration"
+							class="form-control form-select"
+						>
 							<option v-for="n in 14" :key="n">{{ n }}</option>
 						</select>
 					</div>
@@ -147,7 +158,11 @@
 					</div>
 				</div>
 			</div>
-			<div class="row mt-3" v-for="(stop, index) in formData.stopOverParks" :key="stop">
+			<div
+				class="row mt-3"
+				v-for="(stop, index) in formData.stopOverParks"
+				:key="stop"
+			>
 				<div class="col-lg-3">
 					<div class="mb-3">
 						<label>Stop</label>
@@ -156,7 +171,13 @@
 							v-model="formData.stopOverParks[index].parkId"
 						>
 							<option value="">Choose a Park</option>
-							<option v-for="holdingBay in availableHoldingBays" :value="holdingBay._id" :key="holdingBay._id">{{ capitalizer(holdingBay.name) }}</option>
+							<option
+								v-for="holdingBay in availableHoldingBays"
+								:value="holdingBay._id"
+								:key="holdingBay._id"
+							>
+								{{ capitalizer(holdingBay.name) }}
+							</option>
 						</select>
 					</div>
 				</div>
@@ -183,7 +204,11 @@
 				<div class="col-lg-3">
 					<div class="mb-3">
 						<label>&nbsp;</label>
-						<button type="button" @click="removeStop(index)" class="btn btn-danger d-block">
+						<button
+							type="button"
+							@click="removeStop(index)"
+							class="btn btn-danger d-block"
+						>
 							<i class="bx bx-x-circle"></i>
 						</button>
 					</div>
@@ -247,7 +272,7 @@ export default {
 		return {
 			formData: {
 				stopOverParks: [],
-				parkId: this.$store.state.selectedHoldingBay
+				parkId: this.$store.state.selectedHoldingBay,
 			},
 			parks: [],
 			trucks: [],
@@ -264,8 +289,10 @@ export default {
 			return this.$store.getters.availableTrucks;
 		},
 		availableHoldingBays() {
-			return this.$store.getters.getHoldingBays.filter(park => park._id !== this.formData.parkId)
-		}
+			return this.$store.getters.getHoldingBays.filter(
+				(park) => park._id !== this.formData.parkId
+			);
+		},
 	},
 
 	methods: {
@@ -279,16 +306,16 @@ export default {
 		removeTruck(truckIndex) {
 			this.trucks.splice(truckIndex, 1);
 		},
-		
+
 		increaseStopOver() {
 			this.formData.stopOverParks.push({
-				parkId: '',
-				stayingFor: '',
-				expectedDateOfArrival: ''
+				parkId: "",
+				stayingFor: "",
+				expectedDateOfArrival: "",
 			});
 		},
 		removeStop(index) {
-			this.formData.stopOverParks.splice(index, 1)
+			this.formData.stopOverParks.splice(index, 1);
 		},
 		proceedToStepTwo() {
 			this.$emit("stepOneCompleted", { ...this.formData, trucks: this.trucks });

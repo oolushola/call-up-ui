@@ -5,8 +5,8 @@
             <div class="col-lg-12">
                 <div class="text-center mb-5 text-muted">
                     <router-link to="/" class="d-block auth-logo">
-                        <img src="../../assets/images/logo-dark.png" alt="" height="20" class="auth-logo-dark mx-auto">
-                        <img src="../../assets/images/logo-light.png" alt="" height="20" class="auth-logo-light mx-auto">
+                        <img src="../../assets/images/main-logo.png" alt="" height="20" class="auth-logo-dark mx-auto">
+                        <img src="../../assets/images/main-logo.png" alt="" height="20" class="auth-logo-light mx-auto">
                     </router-link>
                     <p class="mt-3">Email Verification</p>
                 </div>

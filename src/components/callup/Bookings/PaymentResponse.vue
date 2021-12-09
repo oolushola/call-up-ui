@@ -33,7 +33,6 @@ export default {
   methods: {
     async updateTransactionLog() {
       this.isLoading = true
-      console.log(this.paymentResponse)
       const walletLog = await this.$store.dispatch('updateWalletLog', this.paymentResponse)
       if(walletLog.status === 201) {
         this.isLoading = false

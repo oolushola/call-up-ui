@@ -92,65 +92,6 @@
 			<!-- container-fluid -->
 		</div>
 
-      <modal v-if="showModal">
-        <template #modalHeader>
-          <h4>Apm Terminals Apapa: MSKU4762653 </h4>
-        </template>
-        <div>
-          <div class="mt-2 mb-2">
-            <strong class="text-danger">Filter by Parks &nbsp; &nbsp;</strong>
-            <div class="badge bg-info rounded-pill p-3 text-white me-1 mb-2">Mob Integrated Services</div>
-            <div class="badge bg-warning rounded-pill p-3 text-white me-1 mb-2">Special Zau Logistics Services</div>
-          </div>
-          <input type="text" class="form-control mt-1" placeholder="Can't wait? Enter Truck No" >
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Truck Number</th>
-                  <th>Transporter</th>
-                  <th>Reference No</th>
-                  <th>&nbsp;</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">
-                    <div class="form-check font-size-16">
-                      <input class="form-check-input" type="checkbox" id="transactionCheck02">
-                      <label class="form-check-label" for="transactionCheck02"></label>
-                    </div>
-                  </th>
-                  <th>ABC123XY</th>
-                  <th>Kaya Africa </th>
-                  <th>LND09897812LB</th>
-                  <th>
-                    <button class="btn btn-sm btn-warning">Match <i class="bx bx-git-compare"></i></button>
-                  </th>
-                </tr>
-                <tr>
-                  <th scope="row">
-                    <div class="form-check font-size-16">
-                      <input class="form-check-input" type="checkbox" id="transactionCheck02">
-                      <label class="form-check-label" for="transactionCheck02"></label>
-                    </div>
-                  </th>
-                  <th>LND765YX</th>
-                  <th>Anas Nigeria Limited</th>
-                  <th>31298912</th>
-                  <th>
-                    <button class="btn btn-sm btn-warning">Match <i class="bx bx-git-compare"></i></button>
-                  </th>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <p>Hello, {{ capitalizer($store.state.user.name) }}! You are about to match TDO with container no: <strong>MSKU4762653</strong> with truck number <strong>ABC123XY</strong>. Kindly note that once this action is completed, it cannot be reverted</p>
-        </div>
-        
-      </modal>
-
 
 	</design-layout>
 </template>

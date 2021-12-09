@@ -1,10 +1,11 @@
-import { createStore  } from "vuex";
+import { createStore } from "vuex";
 import AuthModule from "./Auth";
 import WalletModule from './Wallet'
 import TruckModule from "./Trucks";
 import CallUpModule from "./CallUp"
 import ParkModule from "./Parks";
 import TerminalModule from "./Terminal";
+import UnionModule from "./Union"
 
 const store = new createStore({
   state() {
@@ -19,18 +20,25 @@ const store = new createStore({
         userType: localStorage.getItem('userType')
       } || null,
       displayModal: false,
-      selectedHoldingBay: ''
+      selectedHoldingBay: '',
+      fetchResource: false
+    }
+  },
+  mutations: {
+    ["SET_FETCH_RESOURCE"](state, payload) {
+      state.fetchResource = payload
     }
   },
   getters: {
     nameCapitalizer(state) {
       const arr = state.user.name.split(" ")
-        for (let i = 0; i< arr.length; i++) {
-          arr[i] = arr[i].charAt(0).toUpperCase()+arr[i].slice(1)
-        }
-        const capitalized = arr.join(" ")
-        return capitalized
-    }
+      for (let i = 0; i < arr.length; i++) {
+        arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1)
+      }
+      const capitalized = arr.join(" ")
+      return capitalized
+    },
+    getFetchResource: state => state.fetchResource
   },
   modules: {
     Auth: AuthModule,
@@ -38,7 +46,8 @@ const store = new createStore({
     TruckManagement: TruckModule,
     CallUp: CallUpModule,
     Park: ParkModule,
-    Terminal: TerminalModule
+    Terminal: TerminalModule,
+    Union: UnionModule
   }
 })
 

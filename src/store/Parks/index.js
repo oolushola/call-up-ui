@@ -9,11 +9,17 @@ const ParkModule = {
       newPark: null,
       userParks: [],
       allParks: [],
-      holdingBays: []
+      holdingBays: [],
+      expectedTrucks: [],
+      isLoading: false,
+      parkOverview: {}
     }
   },
 
   mutations: {
+    ["SET_PARK_RESOURCE"](state, payload) {
+      state.isLoading = payload
+    },
     ['SET_PARK_CATEGORIES'](state, payload) {
       state.parkCategories = payload.data
     },
@@ -31,17 +37,26 @@ const ParkModule = {
     },
     ['SET_HOLDING_BAYS'](state, payload) {
       state.holdingBays = payload.data
+    },
+    ["SET_EXPECTED_TRUCKS"](state, payload) {
+      state.expectedTrucks = payload.data
+    },
+    ["SET_PARK_OVERVIEW"](state, payload) {
+      return state.parkOverview = payload.data
     }
   },
 
   actions: actions,
 
   getters: {
-    getParkCategories: state =>  state.parkCategories,
+    getParkCategories: state => state.parkCategories,
     getTerminals: state => state.terminals,
     getParkFeatures: state => state.parkFeatures,
     getUserParks: state => state.userParks,
-    getHoldingBays: state => state.holdingBays
+    getHoldingBays: state => state.holdingBays,
+    getExpectedTrucks: state => state.expectedTrucks,
+    getParkResource: state => state.isLoading,
+    getParkOverview: state => state.parkOverview
   }
 }
 

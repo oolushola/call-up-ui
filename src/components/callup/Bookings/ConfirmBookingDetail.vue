@@ -76,7 +76,8 @@
 												:bookingId="bookingId"
 												:stops="booking.bookingQuery.stops"
 												:addOnServices="booking.bookingQuery.addOnService"
-												@displayPaymentResponse="showPaymentResponse" 
+												@displayPaymentResponse="showPaymentResponse"
+												:charge="parkCharge"
 											/>
 
 											<payment-response :paymentResponse="paymentResponse" v-if="showPaymentResponseModal && showModal" />
@@ -107,7 +108,8 @@ export default {
 		return {
 			bookingId: "",
 			showPaymentResponseModal: false,
-			paymentResponse: {}
+			paymentResponse: {},
+			parkCharge: 5000,
 		};
 	},
 

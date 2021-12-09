@@ -40,20 +40,43 @@
 		</td>
 		<td>{{ park.capacity }} (Trucks)</td>
 		<td>
-			<span class="badge rounded-pill bg-success">{{ getParkStatus }}</span>
+			<span class="badge rounded-pill bg-success me-2">{{
+				getParkStatus
+			}}</span>
 			<span class="badge rounded-pill bg-primary">{{
 				park.profileType.category
 			}}</span>
 		</td>
 		<td class="text-center">{{ park.availableSlot }}</td>
+		<td>
+			<span
+				v-for="park in park.parkType"
+				:key="park"
+				class="badge bg-info me-1"
+				>{{ park }}</span
+			>
+		</td>
+		<td>
+			<span class="badge bg-success p-2">{{
+				park.entryGateSerialNo.toUpperCase()
+			}}</span>
+		</td>
+		<td>
+			<span class="badge bg-danger p-2">{{
+				park.exitGateSerialNo.toUpperCase()
+			}}</span>
+		</td>
 	</tr>
 	<tr :class="showFeatures ? '' : 'd-none'">
 		<td colspan="7">
-      <div v-if="park.features.length <= 0" class="bg-warning text-white d-inline-block p-2 me-1">
-        There are no features available
-      </div>
 			<div
-        v-else
+				v-if="park.features.length <= 0"
+				class="bg-warning text-white d-inline-block p-2 me-1"
+			>
+				There are no features available
+			</div>
+			<div
+				v-else
 				class="bg-primary text-white d-inline-block p-2 me-1"
 				v-for="feature in park.features"
 				:key="feature.featureId"
