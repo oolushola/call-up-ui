@@ -18,7 +18,7 @@ import ViewTdo from "../pages/ClearingAgents/ViewTdo.vue";
 import TrucksInPark from "../pages/Facilities/TrucksInPark";
 import CalledOutTrucks from "../pages/Facilities/CalledOutTrucks";
 
-import TerminalAnalytics from "../pages/Terminals/TerminalAnalytics";
+import TerminalSetUp from "../pages/Terminals/TerminalSetup.vue";
 import UploadTdo from "../pages/Terminals/UploadTdo";
 import MatchedTdo from "../pages/Terminals/MatchedTdo";
 import TerminalHistory from "../pages/Terminals/TerminalHistory";
@@ -204,9 +204,9 @@ const router = createRouter({
       },
     },
     {
-      name: "TerminalAnalytics",
-      path: "/terminal-analytics",
-      component: TerminalAnalytics,
+      name: "TerminalSetUp",
+      path: "/terminal/setup",
+      component: TerminalSetUp,
       meta: {
         requiresAuth: true,
       },

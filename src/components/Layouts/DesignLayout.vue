@@ -333,7 +333,7 @@
 								<ul class="sub-menu" aria-expanded="false">
 									<li>
 										<router-link
-											:to="{ name: 'TerminalAnalytics' }"
+											:to="{ name: 'TerminalSetUp' }"
 											key="t-invoice-list"
 										>
 											Setup
